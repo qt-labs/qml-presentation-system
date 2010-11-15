@@ -1,13 +1,7 @@
 import QtQuick 2.0
 
-Rectangle {
+Item {
     id: root
-    width: 540
-    height: 360
-    gradient: Gradient {
-        GradientStop { position: 0; color: "white" }
-        GradientStop { position: 1; color: "black" }
-    }
 
     property variant slides: []
     property int currentSlide;
@@ -31,9 +25,10 @@ Rectangle {
        }
    }
 
-   function moveToSlide(i) {
-       slides[currentSlide].opacity = 0;
-       slides[i].opacity = 1;
+   function switchSlides(from, to) {
+       from.opacity = 0
+       to.opacity = 1
+       return true
    }
 
    MouseArea {
@@ -41,8 +36,10 @@ Rectangle {
        anchors.fill: parent
        onClicked: {
            if (root.currentSlide + 1 < root.slides.length) {
-               moveToSlide(currentSlide + 1);
-               currentSlide = currentSlide + 1;
+	       var from = slides[currentSlide]
+	       var to = slides[currentSlide + 1]
+               if (switchSlides(from, to))
+	           currentSlide = currentSlide + 1;
            }
        }
    }
