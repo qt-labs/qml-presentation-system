@@ -45,7 +45,7 @@ Item {
         width: slide.contentWidth
         text: centeredText
         horizontalAlignment: Text.Center
-        font.pointSize: baseFontSize
+        font.pixelSize: baseFontSize
         color: slideTextColor
         wrapMode: Text.Wrap
     }
@@ -83,7 +83,7 @@ Item {
                 Text {
                     id: text
                     width: slide.contentWidth
-                    font.pointSize: baseFontSize
+                    font.pixelSize: baseFontSize
                     text: content[index]
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap
