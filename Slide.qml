@@ -62,6 +62,8 @@ Item {
 
             Row {
 
+                height: baseFontSize * 2
+
                 Rectangle {
                     id: dot
                     y: baseFontSize / 2
@@ -90,7 +92,6 @@ Item {
                     color: slide.slideTextColor
                     horizontalAlignment: Text.AlignLeft
                 }
-
             }
         }
     }
