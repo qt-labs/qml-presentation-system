@@ -9,8 +9,11 @@ Item {
     property variant content: []
     property string centeredText
 
-    property real titleFontSize: parent.height * 0.06
-    property real baseFontSize: parent.height * 0.05
+    property real fontSize: parent.height * 0.05
+    property real fontScale: 1
+
+    property real baseFontSize: fontSize * fontScale
+    property real titleFontSize: fontSize * 1.1 * fontScale;
 
     property real contentX: parent.width * 0.05
     property real contentY: parent.height * 0.2
@@ -23,6 +26,8 @@ Item {
     height: parent.height
 
     opacity: 0
+
+    visible: opacity > 0
 
     Text {
         id: titleText
@@ -62,7 +67,7 @@ Item {
 
             Row {
 
-                height: baseFontSize * 2
+                height: text.height + slide.baseFontSize
 
                 Rectangle {
                     id: dot
