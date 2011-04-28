@@ -13,7 +13,8 @@ Item {
     property real fontScale: 1
 
     property real baseFontSize: fontSize * fontScale
-    property real titleFontSize: fontSize * 1.1 * fontScale;
+    property real titleFontSize: fontSize * 1.1 * fontScale
+    property real bulletSpacing: 1
 
     property real contentX: parent.width * 0.05
     property real contentY: parent.height * 0.2
@@ -25,9 +26,7 @@ Item {
     width: parent.width
     height: parent.height
 
-    opacity: 0
-
-    visible: opacity > 0
+    visible: false
 
     Text {
         id: titleText
@@ -67,7 +66,7 @@ Item {
 
             Row {
 
-                height: text.height + slide.baseFontSize
+                height: text.height + slide.baseFontSize * slide.bulletSpacing
 
                 Rectangle {
                     id: dot

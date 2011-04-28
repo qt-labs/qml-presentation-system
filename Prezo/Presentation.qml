@@ -23,13 +23,13 @@ Item {
         // Make first slide visible...
         if (root.slides.length > 0) {
             root.currentSlide = 0;
-            root.slides[root.currentSlide].opacity = 1;
+            root.slides[root.currentSlide].visible = true;
         }
     }
 
     function switchSlides(from, to) {
-        from.opacity = 0
-        to.opacity = 1
+        from.visible = false
+        to.visible = true
         return true
     }
 
