@@ -3,8 +3,8 @@
 ShaderEffectItem {
     id: shader
 
-    width: parent.width
-    height: 100
+    width: 400
+    height: 300
 
     property real speed: 1
 
@@ -23,7 +23,7 @@ ShaderEffectItem {
 
     property real amplitude: height / 2
 
-    property variant colorTable
+    property variant colorTable: ShaderEffectSource { sourceItem: Rectangle { width: 4; height: 4; color: "steelblue" } }
 
     fragmentShader: "
     uniform lowp float qt_Opacity;

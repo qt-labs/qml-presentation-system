@@ -44,6 +44,7 @@ Presentation {
         model: 4
         Swirl {
 
+            width: parent.width
             anchors.bottom: parent.bottom
             height: parent.height / (2 + index)
             opacity: 0.3
@@ -66,13 +67,13 @@ Presentation {
         anchors.fill: parent
         system: particles
         particlesPerSecond: Math.sqrt(parent.width * parent.height) / 30
-        particleDuration: 1000
+        particleDuration: 2000
         emitting: true
         particleSize: 4
         particleSizeVariation: 2
 
-        acceleration: AngleVector{ angle: 90; angleVariation: 360; magnitude: 50; }
-        speed: AngleVector{ angle: 90; angleVariation: 360; magnitude: 10; }
+        acceleration: AngleVector{ angle: 90; angleVariation: 360; magnitude: 20; }
+        speed: AngleVector{ angle: -90; angleVariation: 360; magnitude: 10; }
 
     }
 
