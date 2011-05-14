@@ -1,7 +1,6 @@
 import QtQuick 2.0
-import Prezo 1.0
 
-import Qt.labs.particles 2.0
+import Qt.labs.presentation 1.0
 
 Presentation {
     width: 640

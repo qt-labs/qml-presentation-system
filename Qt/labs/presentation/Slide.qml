@@ -36,6 +36,7 @@ Item {
         font.bold: true;
         color: slideTextColor
         horizontalAlignment: Text.Center
+        z: 1
     }
 
     Text {

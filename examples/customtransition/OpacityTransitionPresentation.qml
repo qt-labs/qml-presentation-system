@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import Prezo 1.0
+import Qt.labs.presentation 1.0
 
 Presentation {
 
@@ -36,13 +36,16 @@ Presentation {
 
         ParallelAnimation {
             NumberAnimation { target: fromSlide; property: "opacity"; from: 1; to: 0; duration: deck.transitionTime; easing.type: Easing.OutQuart }
+            NumberAnimation { target: fromSlide; property: "scale"; from: 1; to: 1.1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
             NumberAnimation { target: toSlide; property: "opacity"; from: 0; to: 1; duration: deck.transitionTime; easing.type: Easing.InQuart }
+            NumberAnimation { target: toSlide; property: "scale"; from: 0.9; to: 1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
         }
 
         ScriptAction { script: {
                 deck.inTransition = false
                 fromSlide.visible = false
                 fromSlide.opacity = 0
+                fromSlide.scale = 1
                 toSlide.opacity = 1
             }
         }
