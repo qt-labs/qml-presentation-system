@@ -8,29 +8,86 @@ Presentation
 
 
     Slide {
-        fontScale: 2
-        centeredText: "Click to walk through intro!"
+        centeredText: "Use [space] or [keypad] to see intro"
+    }
+
+    Slide {
+        title: "Presentation {} Element"
+        content: [
+            "Toplevel element",
+            "Defines background",
+            "Foreground color",
+        ]
+
+        CodeSection {
+            text: "
+import Prezo 1.0
+
+Presentation
+{
+    width: 640
+    height: 360
+
+    // Define a background...
+    // Default is white..
+    Rectangle {
+        id: backgroundColor
+        anchors.fill: parent
+        color: \"blue\"
+    }
+
+    // Set text color
+    property color textColor: \"white\"
+
+    // Then define slide elements
+    Slide { ... }
+    Slide { ... }
+    Slide { ... }
+    ...
+}
+            "
+        }
     }
 
 
     Slide {
-        id: areaSlide
-        title: "Title Text - Bullet points"
+        title: "Slide {} Element"
         content: [
             "Bullet points",
             "Should be short",
-            "And to the point"
+            "And to the point",
+            " Sub point",
+            "  Sub Sub point",
+            " Sub point"
         ]
-        Rectangle {
-            x: areaSlide.contentX
-            y: areaSlide.contentY
-            width: areaSlide.contentWidth
-            height: areaSlide.contentHeight
 
-            color: Qt.rgba(0, 0, 0, 0.1)
+        CodeSection {
+
+            text: "Slide {\n" +
+                  "    id: areaSlide\n" +
+                  "    title: \"Slide {} Element\"\n" +
+                  "    content: [\n" +
+                  "              \"Bullet points\",\n" +
+                  "              \"Should be short\",\n" +
+                  "              \"And to the point\",\n" +
+                  "              \" Sub point\",\n" +
+                  "              \"  Sub Sub point\",\n" +
+                  "              \" Sub point\"\n" +
+                  "             ]\n" +
+                  "}\n"
+        }
+    }
+
+
+    Slide {
+        title: "Slide {}, continued"
+        Rectangle {
+            anchors.fill: parent
+
+            color: "lightgray"
 
             Text {
-                text: "Dedicated content area"
+                text: "Slide fills this area..."
                 anchors.centerIn: parent
             }
         }
@@ -38,13 +95,20 @@ Presentation
 
 
     Slide {
-        title: "Title Text - Centered Text"
-        centeredText: "And this is some centered text..."
+        title: "Slide {}, continued"
+        centeredText: "Use the predefined <i><b><code>centeredText</code></b></i> property to put a single block of text at the center of the Slide{}"
+    }
+
+    Slide {
+        title: "Slide {}, continued"
+        centeredText: '<font color="red"><i>Use</i> rich text, <font color="blue">if <b>you</b> like...'
     }
 
 
+
+
     Slide {
-        title: "Text is relative to presentation height"
+        title: "Font size relative to screen size"
         content: [
             "Which means you don't need to worry about it",
             "Bullet points wraps around on the edges, regardless of how long they are, like this. Even if you should choose to use a very long bullet point (which would distract your audience) it would still look ok'ish",
@@ -53,10 +117,6 @@ Presentation
     }
 
 
-    Slide {
-        centeredText: '<font color="red"><i>Use</i> rich text, <font color="blue">if <b>you</b> like...'
-    }
-
 
     Slide {
         id: interactiveSlide
@@ -64,10 +124,10 @@ Presentation
         title: "Embed Interactive Content"
 
         Rectangle {
-            width: parent.height / 4
+            id: box
+            width: parent.fontSize * 10
             height: width
             color: mouse.pressed ? "lightsteelblue" : "steelblue"
-            anchors.centerIn: parent
 
             NumberAnimation on rotation { from: 0; to: 360; duration: 10000; loops: Animation.Infinite; running: visible }
 
@@ -79,13 +139,20 @@ Presentation
             MouseArea {
                 id: mouse
                 anchors.fill: parent
+                drag.target: box
             }
         }
     }
 
 
     Slide {
-        centeredText: 'Hit "Esc" to fade out the current page if there are questions from the audience'
+        title: "Features"
+        centeredText: 'Hit [esc] to fade out the current page if there are questions from the audience'
+    }
+
+    Slide {
+        title: "Features"
+        centeredText: 'Navigate back and forth using [left] and [right]\n[space] or [click] takes you to the next slide.'
     }
 
 

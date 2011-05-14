@@ -13,18 +13,16 @@ Item {
     property real fontScale: 1
 
     property real baseFontSize: fontSize * fontScale
-    property real titleFontSize: fontSize * 1.1 * fontScale
+    property real titleFontSize: fontSize * 1.2 * fontScale
     property real bulletSpacing: 1
 
-    property real contentX: parent.width * 0.05
-    property real contentY: parent.height * 0.2
-    property real contentWidth: parent.width * 0.9
-    property real contentHeight: parent.height * 0.7
+    // Define the slide to be the "content area"
+    x: parent.width * 0.05
+    y: parent.height * 0.2
+    width: parent.width * 0.9
+    height: parent.height * 0.7
 
     property color slideTextColor: parent.textColor != undefined ? parent.textColor : "black"
-
-    width: parent.width
-    height: parent.height
 
     visible: false
 
@@ -32,21 +30,19 @@ Item {
         id: titleText
         font.pixelSize: titleFontSize
         text: title;
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.topMargin: parent.width * 0.01
-        anchors.leftMargin: parent.width * 0.01
-        anchors.rightMargin: parent.width * 0.01
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.top
+        anchors.bottomMargin: parent.fontSize * 1.5
         font.bold: true;
         color: slideTextColor
+        horizontalAlignment: Text.Center
     }
 
     Text {
         id: centeredId
-        anchors.verticalCenter: parent.verticalCenter
-        x: slide.contentX
-        width: slide.contentWidth
+        width: parent.width
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: - parent.y / 3
         text: centeredText
         horizontalAlignment: Text.Center
         font.pixelSize: baseFontSize
@@ -56,21 +52,25 @@ Item {
 
     Column {
         id: contentId
-        x: slide.contentX
-        y: slide.contentY
-        width: slide.contentHeight
-        height: slide.contentHeight
+        anchors.fill: parent
 
         Repeater {
             model: content.length
 
             Row {
+                id: row
 
-                height: text.height + slide.baseFontSize * slide.bulletSpacing
+                function decideIndentLevel(s) { return s.charAt(0) == " " ? 1 + decideIndentLevel(s.substring(1)) : 0 }
+                property int indentLevel: decideIndentLevel(content[index])
+                property int nextIndentLevel: index < content.length - 1 ? decideIndentLevel(content[index+1]) : 0
+                property real indentFactor: (10 - row.indentLevel * 2) / 10;
+
+                height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
+                x: 50 * indentLevel
 
                 Rectangle {
                     id: dot
-                    y: baseFontSize / 2
+                    y: baseFontSize * row.indentFactor / 2
                     width: baseFontSize / 4
                     height: baseFontSize / 4
                     color: slide.slideTextColor
@@ -88,8 +88,8 @@ Item {
 
                 Text {
                     id: text
-                    width: slide.contentWidth
-                    font.pixelSize: baseFontSize
+                    width: slide.width
+                    font.pixelSize: baseFontSize * row.indentFactor
                     text: content[index]
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap

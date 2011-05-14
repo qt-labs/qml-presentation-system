@@ -1,7 +1,7 @@
 import Prezo 1.0
 import QtQuick 2.0
 
-DissolvingPresentation
+OpacityTransitionPresentation
 {
     Slide {
         id: slide1
@@ -29,18 +29,6 @@ DissolvingPresentation
             "Nunc tincidunt nisl sed ante vehicula consequat."
         ]
         bulletSpacing: 0
-    }
-
-    Slide {
-        Image {
-            source: "distortion.png"
-            smooth: true
-
-            x: parent.contentX
-            y: parent.contentY
-            width: parent.contentWidth
-            height: parent.contentHeight
-        }
     }
 
     Slide {

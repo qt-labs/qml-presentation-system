@@ -3,9 +3,11 @@ import Prezo 1.0
 
 import Qt.labs.particles 2.0
 
-AnimatedPresentation {
+Presentation {
     width: 640
     height: 360
+
+    BackgroundSwirls {}
 
     property color textColor: "white"
 
