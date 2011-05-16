@@ -16,6 +16,8 @@ Item {
     property real titleFontSize: fontSize * 1.2 * fontScale
     property real bulletSpacing: 1
 
+    property real contentWidth: width
+
     // Define the slide to be the "content area"
     x: parent.width * 0.05
     y: parent.height * 0.2
@@ -67,7 +69,7 @@ Item {
                 property real indentFactor: (10 - row.indentLevel * 2) / 10;
 
                 height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
-                x: 50 * indentLevel
+                x: slide.baseFontSize * indentLevel
 
                 Rectangle {
                     id: dot
@@ -89,7 +91,7 @@ Item {
 
                 Text {
                     id: text
-                    width: slide.width
+                    width: slide.contentWidth - parent.x - dot.width - space.width
                     font.pixelSize: baseFontSize * row.indentFactor
                     text: content[index]
                     textFormat: Text.PlainText

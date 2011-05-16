@@ -78,14 +78,11 @@ Presentation
         }
     }
 
-
     Slide {
         title: "Slide {}, continued"
         Rectangle {
             anchors.fill: parent
-
-            color: "lightgray"
-
+            color: "lightGray"
             Text {
                 text: "Slide fills this area..."
                 anchors.centerIn: parent
@@ -93,6 +90,26 @@ Presentation
         }
     }
 
+    Slide {
+        id: fillAreaSlide
+        title: "Slide {}, continued"
+        content: ["The built-in property \"contentWidth\" can be used to let the bullet points fill a smaller area of the slide..."]
+
+        SequentialAnimation on contentWidth {
+            PropertyAction { value: fillAreaSlide.width }
+            PauseAnimation { duration: 2500 }
+            NumberAnimation { to: fillAreaSlide.width / 2; duration: 5000; easing.type: Easing.InOutCubic }
+            running: fillAreaSlide.visible
+        }
+
+        Rectangle {
+            height: parent.height
+            width: parent.contentWidth
+
+            color: "lightGray"
+            z: -1
+        }
+    }
 
     Slide {
         title: "Slide {}, continued"
