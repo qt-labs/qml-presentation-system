@@ -24,6 +24,9 @@ Item {
     width: parent.width * 0.9
     height: parent.height * 0.7
 
+    property real masterWidth: parent.width
+    property real masterHeight: parent.height
+
     property color slideTextColor: parent.textColor != undefined ? parent.textColor : "black"
 
     visible: false
