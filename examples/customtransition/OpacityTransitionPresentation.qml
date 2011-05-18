@@ -5,8 +5,8 @@ Presentation {
 
     id: deck
 
-    width: 600
-    height: 400
+    width: 1280
+    height: 720
 
     property color textColor: "white"
 
@@ -38,7 +38,7 @@ Presentation {
             NumberAnimation { target: fromSlide; property: "opacity"; from: 1; to: 0; duration: deck.transitionTime; easing.type: Easing.OutQuart }
             NumberAnimation { target: fromSlide; property: "scale"; from: 1; to: 1.1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
             NumberAnimation { target: toSlide; property: "opacity"; from: 0; to: 1; duration: deck.transitionTime; easing.type: Easing.InQuart }
-            NumberAnimation { target: toSlide; property: "scale"; from: 0.9; to: 1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
+            NumberAnimation { target: toSlide; property: "scale"; from: 0.7; to: 1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
         }
 
         ScriptAction { script: {
