@@ -39,8 +39,10 @@ Item {
         if (root.currentSlide + 1 < root.slides.length) {
             var from = slides[currentSlide]
             var to = slides[currentSlide + 1]
-            if (switchSlides(from, to))
+            if (switchSlides(from, to)) {
                 currentSlide = currentSlide + 1;
+                root.focus = true;
+            }
         }
     }
 
@@ -50,8 +52,10 @@ Item {
         if (root.currentSlide - 1 >= 0) {
             var from = slides[currentSlide]
             var to = slides[currentSlide - 1]
-            if (switchSlides(from, to))
+           if (switchSlides(from, to)) {
                 currentSlide = currentSlide - 1;
+               root.focus = true;		
+           }
         }
     }
 

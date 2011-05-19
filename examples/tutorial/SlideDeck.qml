@@ -20,32 +20,25 @@ Presentation
         ]
 
         CodeSection {
-            text: "
-import Prezo 1.0
-
-Presentation
+            text: "Presentation
 {
     width: 640
     height: 360
 
-    // Define a background...
-    // Default is white..
+    // Define a background color...
     Rectangle {
-        id: backgroundColor
         anchors.fill: parent
-        color: \"blue\"
+        color: \"white\"
     }
 
-    // Set text color
-    property color textColor: \"white\"
+    property color textColor: \"black\"
 
     // Then define slide elements
     Slide { ... }
     Slide { ... }
     Slide { ... }
     ...
-}
-            "
+}"
         }
     }
 
