@@ -18,13 +18,12 @@ OpacityTransitionPresentation
     Slide {
         title: "Custom Transitions, 3"
         content: [
-            "In this transition we do",
-            " 'from' slide gets",
-            "  opacity fades out",
-            "  scale increases slightly",
-            " 'to' slide gets",
-            "  opacity fades in",
-            "  scale increases from small to normal",
+            "'from' slide",
+            " opacity fades out",
+            " scale increases slightly",
+            "'to' slide",
+            " opacity fades in",
+            " scale increases from small to normal",
             "All with a fairly simple ParallelAnimation {}"
         ]
     }
