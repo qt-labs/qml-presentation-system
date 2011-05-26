@@ -1,0 +1,34 @@
+This is a slide presentation system written in QML.
+
+
+
+Installing
+----------
+
+No installation is required. Just add the root directory to your QML_IMPORT_PATH
+and run 'qmlscene' on your slides to run presentations. 
+
+
+
+Organization
+------------
+
+There is a tutorial covering most features under:
+  examples/tutorial/SlideDeck.qml
+This is a good place to start if you want to use it.
+
+Examples on more advanced presentations are located here:
+  examples/customtransition/SlideDeck.qml
+  examples/animatedbackground/SlideDeck.qml
+
+The source code for the Slide and Presentation elements are located under:
+  Qt/labs/presentation
+
+
+
+Usage Tips
+----------
+
+ - The default size of presentations is hardcoded into the presentation .qml
+   file. One can pass '--fullscreen' on the command line to qmlscene to show
+   the presentation fullscreen.
