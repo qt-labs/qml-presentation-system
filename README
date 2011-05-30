@@ -5,9 +5,9 @@ This is a slide presentation system written in QML.
 Installing
 ----------
 
-No installation is required. Just add the root directory to your QML_IMPORT_PATH
-and run 'qmlscene' on your slides to run presentations. 
+Do 'make install' in the root directory to install the files to QTDIR/imports
 
+Once that is done, all examples should run out of the box
 
 
 Organization
