@@ -97,10 +97,14 @@ Item {
 
     focus: true
 
-    Keys.onSpacePressed: goToNextSlide();
-    Keys.onRightPressed: goToNextSlide();
-    Keys.onLeftPressed: goToPreviousSlide();
-    Keys.onEscapePressed: root.faded = !root.faded;
+    Keys.onSpacePressed: goToNextSlide()
+    Keys.onRightPressed: goToNextSlide()
+    Keys.onLeftPressed: goToPreviousSlide()
+    Keys.onEscapePressed: Qt.quit()
+    Keys.onPressed: {
+        if (event.key == Qt.Key_C)
+            root.faded = !root.faded
+    }
 
     Rectangle {
         z: 1000
