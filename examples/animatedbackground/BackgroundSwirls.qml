@@ -35,7 +35,7 @@
 **************************************************************************/
 
 import QtQuick 2.0
-import Qt.labs.particles 2.0
+import QtQuick.Particles 2.0
 
 Item {
     anchors.fill: parent
@@ -89,24 +89,25 @@ Item {
     ParticleSystem{
         id: particles
     }
-    ColoredParticle{
+    ImageParticle{
         anchors.fill: parent
         system: particles
-        image: "particle.png"
+        source: "particle.png"
         alpha: 0
         colorVariation: 0.3
     }
-    TrailEmitter{
+
+    Emitter{
         anchors.fill: parent
         system: particles
-        particlesPerSecond: Math.sqrt(parent.width * parent.height) / 30
-        particleDuration: 2000
+        emitRate: Math.sqrt(parent.width * parent.height) / 30
+        lifeSpan: 2000
         emitting: true
-        particleSize: 4
-        particleSizeVariation: 2
+        size: 4
+        sizeVariation: 2
 
-        acceleration: AngleVector{ angle: 90; angleVariation: 360; magnitude: 20; }
-        speed: AngleVector{ angle: -90; angleVariation: 360; magnitude: 10; }
+        acceleration: AngledDirection { angle: 90; angleVariation: 360; magnitude: 20; }
+        speed: AngledDirection { angle: -90; angleVariation: 360; magnitude: 10; }
 
     }
 
