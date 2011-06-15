@@ -193,7 +193,7 @@ Presentation
 
     Slide {
         title: "Features"
-        centeredText: 'Hit [esc] to fade out the current page if there are questions from the audience'
+        centeredText: 'Hit [C] to fade out the current page if there are questions from the audience'
     }
 
     Slide {
