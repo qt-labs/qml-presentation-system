@@ -60,9 +60,9 @@ Presentation {
             " Colorized using a gradient rect converted to a texture",
             " Controlled using QML properties and animations",
             "Snow",
-            " Using 'Qt.labs.particles 2.0'",
-            " TrailsEmitter",
-            " ColoredParticle"
+            " Using 'QtQuick.Particles 2.0'",
+            " Emitter",
+            " ImageParticle"
         ]
     }
 
