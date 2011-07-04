@@ -44,6 +44,8 @@ Item {
 
     property bool faded: false
 
+    property int userNum;
+
     Component.onCompleted: {
         var slideCount = 0;
         var slides = [];
@@ -55,6 +57,7 @@ Item {
         }
 
         root.slides = slides;
+        root.userNum = 0;
 
         // Make first slide visible...
         if (root.slides.length > 0) {
@@ -70,6 +73,7 @@ Item {
     }
 
     function goToNextSlide() {
+        root.userNum = 0
         if (faded)
             return
         if (root.currentSlide + 1 < root.slides.length) {
@@ -83,6 +87,7 @@ Item {
     }
 
     function goToPreviousSlide() {
+        root.userNum = 0
         if (root.faded)
             return
         if (root.currentSlide - 1 >= 0) {
@@ -90,7 +95,21 @@ Item {
             var to = slides[currentSlide - 1]
            if (switchSlides(from, to)) {
                 currentSlide = currentSlide - 1;
-               root.focus = true;		
+               root.focus = true;
+           }
+        }
+    }
+
+    function goToUserSlide() {
+        --userNum;
+        if (root.faded || userNum < 0 || userNum >= root.slides.length)
+            return
+        if (root.currentSlide != userNum) {
+            var from = slides[currentSlide]
+            var to = slides[userNum]
+           if (switchSlides(from, to)) {
+                currentSlide = userNum;
+               root.focus = true;
            }
         }
     }
@@ -102,8 +121,16 @@ Item {
     Keys.onLeftPressed: goToPreviousSlide()
     Keys.onEscapePressed: Qt.quit()
     Keys.onPressed: {
-        if (event.key == Qt.Key_C)
-            root.faded = !root.faded
+        if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
+            userNum = 10 * userNum + (event.key - Qt.Key_0)
+        else
+        {
+            if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
+                goToUserSlide();
+            else if (event.key == Qt.Key_C)
+                root.faded = !root.faded;
+            userNum = 0;
+        }
     }
 
     Rectangle {
@@ -119,6 +146,4 @@ Item {
         anchors.fill: parent
         onClicked: goToNextSlide()
     }
-
-
 }
