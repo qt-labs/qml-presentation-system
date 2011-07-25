@@ -102,9 +102,11 @@ Item {
 
     function goToUserSlide() {
         --userNum;
-        if (root.faded || userNum < 0 || userNum >= root.slides.length)
+        if (root.faded || userNum >= root.slides.length)
             return
-        if (root.currentSlide != userNum) {
+        if (userNum < 0)
+            goToNextSlide()
+        else if (root.currentSlide != userNum) {
             var from = slides[currentSlide]
             var to = slides[userNum]
            if (switchSlides(from, to)) {
@@ -118,15 +120,18 @@ Item {
 
     Keys.onSpacePressed: goToNextSlide()
     Keys.onRightPressed: goToNextSlide()
+    Keys.onDownPressed: goToNextSlide()
     Keys.onLeftPressed: goToPreviousSlide()
+    Keys.onUpPressed: goToPreviousSlide()
     Keys.onEscapePressed: Qt.quit()
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
             userNum = 10 * userNum + (event.key - Qt.Key_0)
-        else
-        {
+        else {
             if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
                 goToUserSlide();
+            else if (event.key == Qt.Key_Backspace)
+                goToPreviousSlide();
             else if (event.key == Qt.Key_C)
                 root.faded = !root.faded;
             userNum = 0;
@@ -144,6 +149,12 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        onClicked: goToNextSlide()
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: {
+            if (mouse.button == Qt.RightButton)
+                goToPreviousSlide()
+            else
+                goToNextSlide()
+        }
     }
 }
