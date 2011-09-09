@@ -41,7 +41,7 @@ OpacityTransitionPresentation
 {
     Slide {
         title: "Custom Transitions, 1"
-        centeredText: "The Presentation {} Element has a 'switchSlides(from, to)' function which will be called whenever a transition between slides should take place."
+        centeredText: "The Presentation {} Element has a 'switchSlides(from, to, forward)' function which will be called whenever a transition between slides should take place."
     }
 
     Slide {

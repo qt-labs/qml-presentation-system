@@ -62,32 +62,36 @@ Presentation {
     }
 
     SequentialAnimation {
-        id: transition
-        ScriptAction { script: {
-                deck.inTransition = true
-                fromSlide.opacity = 0
-                toSlide.visible = true
-            }
-        }
-
+        id: forwardTransition
+        PropertyAction { target: deck; property: "inTransition"; value: true }
+        PropertyAction { target: toSlide; property: "visible"; value: true }
         ParallelAnimation {
             NumberAnimation { target: fromSlide; property: "opacity"; from: 1; to: 0; duration: deck.transitionTime; easing.type: Easing.OutQuart }
             NumberAnimation { target: fromSlide; property: "scale"; from: 1; to: 1.1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
             NumberAnimation { target: toSlide; property: "opacity"; from: 0; to: 1; duration: deck.transitionTime; easing.type: Easing.InQuart }
             NumberAnimation { target: toSlide; property: "scale"; from: 0.7; to: 1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
         }
-
-        ScriptAction { script: {
-                deck.inTransition = false
-                fromSlide.visible = false
-                fromSlide.opacity = 0
-                fromSlide.scale = 1
-                toSlide.opacity = 1
-            }
+        PropertyAction { target: fromSlide; property: "visible"; value: false }
+        PropertyAction { target: fromSlide; property: "scale"; value: 1 }
+        PropertyAction { target: deck; property: "inTransition"; value: false }
+    }
+    SequentialAnimation {
+        id: backwardTransition
+        running: false
+        PropertyAction { target: deck; property: "inTransition"; value: true }
+        PropertyAction { target: toSlide; property: "visible"; value: true }
+        ParallelAnimation {
+            NumberAnimation { target: fromSlide; property: "opacity"; from: 1; to: 0; duration: deck.transitionTime; easing.type: Easing.OutQuart }
+            NumberAnimation { target: fromSlide; property: "scale"; from: 1; to: 0.7; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
+            NumberAnimation { target: toSlide; property: "opacity"; from: 0; to: 1; duration: deck.transitionTime; easing.type: Easing.InQuart }
+            NumberAnimation { target: toSlide; property: "scale"; from: 1.1; to: 1; duration: deck.transitionTime; easing.type: Easing.InOutQuart }
         }
+        PropertyAction { target: fromSlide; property: "visible"; value: false }
+        PropertyAction { target: fromSlide; property: "scale"; value: 1 }
+        PropertyAction { target: deck; property: "inTransition"; value: false }
     }
 
-    function switchSlides(from, to)
+    function switchSlides(from, to, forward)
     {
         if (deck.inTransition)
             return false
@@ -95,7 +99,10 @@ Presentation {
         deck.fromSlide = from
         deck.toSlide = to
 
-        transition.running = true;
+        if (forward)
+            forwardTransition.running = true
+        else
+            backwardTransition.running = true
 
         return true
     }

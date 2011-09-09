@@ -66,7 +66,7 @@ Item {
         }
     }
 
-    function switchSlides(from, to) {
+    function switchSlides(from, to, forward) {
         from.visible = false
         to.visible = true
         return true
@@ -79,7 +79,7 @@ Item {
         if (root.currentSlide + 1 < root.slides.length) {
             var from = slides[currentSlide]
             var to = slides[currentSlide + 1]
-            if (switchSlides(from, to)) {
+            if (switchSlides(from, to, true)) {
                 currentSlide = currentSlide + 1;
                 root.focus = true;
             }
@@ -93,7 +93,7 @@ Item {
         if (root.currentSlide - 1 >= 0) {
             var from = slides[currentSlide]
             var to = slides[currentSlide - 1]
-           if (switchSlides(from, to)) {
+           if (switchSlides(from, to, false)) {
                 currentSlide = currentSlide - 1;
                root.focus = true;
            }
@@ -109,7 +109,7 @@ Item {
         else if (root.currentSlide != userNum) {
             var from = slides[currentSlide]
             var to = slides[userNum]
-           if (switchSlides(from, to)) {
+           if (switchSlides(from, to, userNum > currentSlide)) {
                 currentSlide = userNum;
                root.focus = true;
            }
