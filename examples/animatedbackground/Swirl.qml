@@ -36,7 +36,7 @@
 
 import QtQuick 2.0
 
-ShaderEffectItem {
+ShaderEffect {
     id: shader
 
     width: 400
@@ -79,7 +79,7 @@ ShaderEffectItem {
     uniform highp float tz;
     uniform highp float tw;
     uniform highp float amplitude;
-    uniform highp mat4 qt_ModelViewProjectionMatrix;
+    uniform highp mat4 qt_Matrix;
     attribute highp vec4 qt_Vertex;
     attribute highp vec2 qt_MultiTexCoord0;
     varying highp vec2 qt_TexCoord0;
@@ -92,7 +92,7 @@ ShaderEffectItem {
 
         pos.y += mix(y1, y2, qt_MultiTexCoord0.y) * amplitude * 0.5;
 
-        gl_Position = qt_ModelViewProjectionMatrix * pos;
+        gl_Position = qt_Matrix * pos;
         qt_TexCoord0 = qt_MultiTexCoord0;
     }
     "

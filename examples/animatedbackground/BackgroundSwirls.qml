@@ -102,12 +102,11 @@ Item {
         system: particles
         emitRate: Math.sqrt(parent.width * parent.height) / 30
         lifeSpan: 2000
-        emitting: true
         size: 4
         sizeVariation: 2
 
-        acceleration: AngledDirection { angle: 90; angleVariation: 360; magnitude: 20; }
-        speed: AngledDirection { angle: -90; angleVariation: 360; magnitude: 10; }
+        acceleration: AngleDirection { angle: 90; angleVariation: 360; magnitude: 20; }
+        speed: AngleDirection { angle: -90; angleVariation: 360; magnitude: 10; }
 
     }
 
