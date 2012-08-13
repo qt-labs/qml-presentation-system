@@ -55,7 +55,7 @@ Presentation {
         title: "Composition"
         content: [
             "Gradient Rectangle",
-            "Swirls using ShaderEffectItem",
+            "Swirls using ShaderEffect",
             " Movement using a vertexShader",
             " Colorized using a gradient rect converted to a texture",
             " Controlled using QML properties and animations",
