@@ -64,6 +64,7 @@ Item {
     property real masterHeight: parent.height
 
     property color slideTextColor: parent.textColor != undefined ? parent.textColor : "black"
+    property string slideFontFamily: parent.fontFamily != undefined ? parent.fontFamily : "Helvetica"
 
     visible: false
 
@@ -75,6 +76,7 @@ Item {
         anchors.bottom: parent.top
         anchors.bottomMargin: parent.fontSize * 1.5
         font.bold: true;
+        font.family: parent.slideFontFamily
         color: slideTextColor
         horizontalAlignment: Text.Center
         z: 1
@@ -88,6 +90,7 @@ Item {
         text: centeredText
         horizontalAlignment: Text.Center
         font.pixelSize: baseFontSize
+        font.family: parent.slideFontFamily
         color: slideTextColor
         wrapMode: Text.Wrap
     }
@@ -137,6 +140,7 @@ Item {
                     wrapMode: Text.WordWrap
                     color: slide.slideTextColor
                     horizontalAlignment: Text.AlignLeft
+                    font.family: parent.slideFontFamily
                 }
             }
         }
