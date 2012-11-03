@@ -58,10 +58,12 @@ Item {
         property color color2: Qt.rgba(0.8, 0.8, 1, 0.3)
 
         gradient: Gradient {
-            GradientStop { position: 0; color: colorTableItem.color1 }
+            GradientStop { position: 0.0; color: "transparent"}
+            GradientStop { position: 0.05; color: colorTableItem.color1 }
             GradientStop { position: 0.3; color: "transparent" }
             GradientStop { position: 0.7; color: "transparent" }
-            GradientStop { position: 1; color: colorTableItem.color2 }
+            GradientStop { position: 0.95; color: colorTableItem.color2 }
+            GradientStop { position: 1.0; color: "transparent" }
         }
 
         visible: false
@@ -102,13 +104,11 @@ Item {
         system: particles
         emitRate: Math.sqrt(parent.width * parent.height) / 30
         lifeSpan: 2000
-        emitting: true
         size: 4
         sizeVariation: 2
 
-        acceleration: AngledDirection { angle: 90; angleVariation: 360; magnitude: 20; }
-        speed: AngledDirection { angle: -90; angleVariation: 360; magnitude: 10; }
-
+        acceleration: AngleDirection { angle: 90; angleVariation: 360; magnitude: 20; }
+        velocity: AngleDirection { angle: -90; angleVariation: 360; magnitude: 10; }
     }
 
 }
