@@ -30,6 +30,16 @@ int main (int argc, char* argv[]) {
     app.setApplicationVersion("0.2");
     app.setApplicationDisplayName("QML Presentation Slide Printer");
     SlideView mainView;
+    argc = app.arguments().length();
+    if ((argc != 2) || app.arguments()[1].endsWith("?")) {
+        QString progName = app.applicationName();
+        QString message = QString().arg(progName);
+        qFatal("%s usage: \n\t    %s path/to/presentation.qml\n"
+            "Displays and prints each slides to slides.pdf\n",
+            progName.toLocal8Bit().constData(),
+            progName.toLocal8Bit().constData());
+        return 2;
+    }
     mainView.setSource(app.arguments()[1]);
     mainView.show();
     return app.exec();

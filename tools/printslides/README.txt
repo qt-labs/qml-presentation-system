@@ -13,4 +13,4 @@ Instructions:
 Example:
   printslides ../../examples/tutorial/SlideDeck.qml
 
-Creates a "Slides.pdf" file in your current directory.
+Creates a "slides.pdf" file in your current directory.
