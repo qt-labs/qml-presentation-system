@@ -150,6 +150,11 @@ Presentation
         centeredText: '<font color="red"><i>Use</i> rich text, <font color="blue">if <b>you</b> like...'
     }
 
+    Slide {
+        title: "Slide {}, continued"
+        writeInText: "You can also use the 'writeInText' property for text that should appear character-by-character, like this...\n\n\nProin vulputate pretium tortor, ut bibendum nisi ultricies et. Nullam pharetra tincidunt lorem eu consequat. Sed placerat sem non lacus dictum at lobortis tellus molestie. Fusce sit amet iaculis odio. Ut dictum nibh quis justo lacinia pulvinar. In hac habitasse platea dictumst. Aliquam erat volutpat."
+    }
+
 
 
 

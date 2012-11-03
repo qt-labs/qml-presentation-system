@@ -44,6 +44,7 @@ Item {
     property string title;
     property variant content: []
     property string centeredText
+    property string writeInText;
 
     property real fontSize: parent.height * 0.05
     property real fontScale: 1
@@ -76,7 +77,7 @@ Item {
         anchors.bottom: parent.top
         anchors.bottomMargin: parent.fontSize * 1.5
         font.bold: true;
-        font.family: parent.slideFontFamily
+        font.family: slide.slideFontFamily
         color: slideTextColor
         horizontalAlignment: Text.Center
         z: 1
@@ -90,10 +91,33 @@ Item {
         text: centeredText
         horizontalAlignment: Text.Center
         font.pixelSize: baseFontSize
-        font.family: parent.slideFontFamily
+        font.family: slide.slideFontFamily
         color: slideTextColor
         wrapMode: Text.Wrap
     }
+
+    Text {
+        id: writeInTextId
+        property int length;
+        font.family: slide.slideFontFamily
+        font.pixelSize: baseFontSize
+        color: slideTextColor
+
+        anchors.fill: parent;
+        wrapMode: Text.Wrap
+
+        text: slide.writeInText.substring(0, length);
+
+        NumberAnimation on length {
+            from: 0;
+            to: slide.writeInText.length;
+            duration: slide.writeInText.length * 50;
+            running: slide.visible && parent.visible
+        }
+
+        visible: slide.writeInText != undefined;
+    }
+
 
     Column {
         id: contentId
@@ -140,7 +164,7 @@ Item {
                     wrapMode: Text.WordWrap
                     color: slide.slideTextColor
                     horizontalAlignment: Text.AlignLeft
-                    font.family: parent.slideFontFamily
+                    font.family: slide.slideFontFamily
                 }
             }
         }
