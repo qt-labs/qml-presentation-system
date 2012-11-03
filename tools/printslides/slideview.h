@@ -25,7 +25,7 @@
 /** A class for viewing and printing a QML Presentation with Slides.
     Assumes the root object of the QML file that was loaded is derived from
     Presentation from qt-labs qml-presentation-system
-    git clone git://gitorious.org/qt-labs/qml-presentation-system.git
+    @author Alan Ezust
 */
 class SlideView : public QQuickView {
     Q_OBJECT
