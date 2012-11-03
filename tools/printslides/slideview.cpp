@@ -83,10 +83,10 @@ void SlideView::timerEvent(QTimerEvent*) {
 
 
 void SlideView::printCurrentSlide() {
-    QPixmap pix = screen()->grabWindow(winId());
+    QImage pix = grabWindow();
     qDebug() << "Printing slide#" << m_printedSlides + 1 << "Resolution:" << pix.size();
     QSize targetSize = m_printer.pageRect().size();
-    m_painter.drawPixmap(m_printer.pageRect().x(), m_printer.pageRect().y(), pix.scaled(targetSize, Qt::KeepAspectRatio, Qt::SmoothTransformation) );
+    m_painter.drawImage(m_printer.pageRect().x(), m_printer.pageRect().y(), pix.scaled(targetSize, Qt::KeepAspectRatio, Qt::SmoothTransformation) );
 }
 
 void SlideView::goToNextSlide() {
