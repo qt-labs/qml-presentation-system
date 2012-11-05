@@ -156,13 +156,34 @@ Presentation
     }
 
 
+    CodeSlide {
+        title: "CodeSlide {} Element"
+        code:
+"CodeSlide {
+    title: \"CodeSlide {} Element\"
+    code:
+\"
+// Whitespaces are preserved,
+// so we start at the beginning of the line...
 
+// You can mouse click on any line
+
+// Navigate with keypad when the code has focus
+
+int main(int argc, char **argv) {
+    QGuiApplication app;
+    QWindow window;
+    window.show();
+    return app.exec();
+}
+\" "
+    }
 
     Slide {
         title: "Font size relative to screen size"
         content: [
             "Which means you don't need to worry about it",
-            "Bullet points wraps around on the edges, regardless of how long they are, like this. Even if you should choose to use a very long bullet point (which would distract your audience) it would still look ok'ish",
+            "Bullet points wrap around on the edges, regardless of how long they are, like this. Even if you should choose to use a very long bullet point (which would distract your audience) it would still look ok'ish",
             "If you run out of height, you're out of luck though..."
         ]
     }

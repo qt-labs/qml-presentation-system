@@ -5,6 +5,7 @@ CONFIG += plugin
 
 qmldir.files += \
     src/qmldir \
+    src/CodeSlide.qml \
     src/Presentation.qml \
     src/Slide.qml 
 
