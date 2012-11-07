@@ -64,8 +64,9 @@ Item {
     property real masterWidth: parent.width
     property real masterHeight: parent.height
 
-    property color slideTextColor: parent.textColor != undefined ? parent.textColor : "black"
-    property string slideFontFamily: parent.fontFamily != undefined ? parent.fontFamily : "Helvetica"
+    property color titleColor: parent.titleColor != undefined ? parent.titleColor : textColor;
+    property color textColor: parent.textColor != undefined ? parent.textColor : "black"
+    property string fontFamily: parent.fontFamily != undefined ? parent.fontFamily : "Helvetica"
 
     visible: false
 
@@ -77,8 +78,8 @@ Item {
         anchors.bottom: parent.top
         anchors.bottomMargin: parent.fontSize * 1.5
         font.bold: true;
-        font.family: slide.slideFontFamily
-        color: slideTextColor
+        font.family: slide.fontFamily
+        color: slide.titleColor
         horizontalAlignment: Text.Center
         z: 1
     }
@@ -91,17 +92,17 @@ Item {
         text: centeredText
         horizontalAlignment: Text.Center
         font.pixelSize: baseFontSize
-        font.family: slide.slideFontFamily
-        color: slideTextColor
+        font.family: slide.fontFamily
+        color: slide.textColor
         wrapMode: Text.Wrap
     }
 
     Text {
         id: writeInTextId
         property int length;
-        font.family: slide.slideFontFamily
+        font.family: slide.fontFamily
         font.pixelSize: baseFontSize
-        color: slideTextColor
+        color: slide.textColor
 
         anchors.fill: parent;
         wrapMode: Text.Wrap
@@ -112,7 +113,7 @@ Item {
             from: 0;
             to: slide.writeInText.length;
             duration: slide.writeInText.length * 50;
-            running: slide.visible && parent.visible
+            running: slide.visible && parent.visible && writeInTextId.length
         }
 
         visible: slide.writeInText != undefined;
@@ -142,7 +143,7 @@ Item {
                     y: baseFontSize * row.indentFactor / 2
                     width: baseFontSize / 4
                     height: baseFontSize / 4
-                    color: slide.slideTextColor
+                    color: slide.textColor
                     radius: width / 2
                     smooth: true
                     opacity: text.text.length == 0 ? 0 : 1
@@ -162,9 +163,9 @@ Item {
                     text: content[index]
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap
-                    color: slide.slideTextColor
+                    color: slide.textColor
                     horizontalAlignment: Text.AlignLeft
-                    font.family: slide.slideFontFamily
+                    font.family: slide.fontFamily
                 }
             }
         }

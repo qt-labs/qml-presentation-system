@@ -39,8 +39,13 @@ import QtQuick 2.0
 
 Presentation
 {
+    id: presentation
+
     width: 1280
     height: 720
+
+    SlideCounter {}
+    Clock {}
 
 
     Slide {
@@ -227,6 +232,73 @@ int main(int argc, char **argv) {
         centeredText: 'Navigate back and forth using [left] and [right]\n[space] or [click] takes you to the next slide.'
     }
 
+    CodeSlide {
+        title: "Slide Counter"
+        code:
+"Presentation {
+
+    SlideCounter {
+        // Defaults:
+        // anchors.right: parent.right
+        // anchors.bottom: parent.bottom
+        // anchors.margins: fontSize;
+        // textColor: 'black'
+        // fontFamily: 'Helvetica' (from presentation)
+        // fontScale: 0.5;
+        }
+    }
+
+    Slide {
+        ...
+    }
+}"
+    }
+
+    CodeSlide {
+        title: "Clock"
+        code:
+"Presentation {
+
+    Clock {
+        // Defaults:
+        // anchors.let: parent.left
+        // anchors.bottom: parent.bottom
+        // anchors.margins: fontSize;
+        // textColor: 'black'
+        // fontFamily: 'Helvetica' (from presentation)
+        // fontScale: 0.5;
+        }
+    }
+
+    Slide {
+        ...
+    }
+}"
+    }
+
+    Slide {
+        title: "Customizations"
+        titleColor: "white"
+
+        textColor: "green"
+        fontFamily: "Times New Roman"
+
+        Rectangle {
+            x: -parent.x
+            y: -parent.y
+            width: presentation.width
+            height: parent.y * 0.9
+            color: "black"
+        }
+
+        content: [
+            "Bullet points, centered text, write-in-text or code listings, can be changed using 'textColor'",
+            "Title can be changed with 'textColor'",
+            "Font can be changed using 'fontFamily'",
+            "Change 'fontScale' for bigger or smaller fonts",
+            "All can be set globally on the presentation (and then inherited in all Slide {} elements), or set directly on a specific Slide {} element."
+        ]
+    }
 
     Slide {
         centeredText: "Now go make our own presentations\n\nEnjoy!"
