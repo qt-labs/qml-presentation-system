@@ -44,7 +44,7 @@ Presentation {
 
     BackgroundSwirls {}
 
-    property color textColor: "white"
+    textColor: "white"
 
     Slide {
         centeredText: "Animated Background"

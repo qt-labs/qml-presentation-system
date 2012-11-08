@@ -19,7 +19,7 @@ Presentation {
     Clock { textColor: "white" }
     SlideCounter { textColor: "white" }
 
-    property string titleColor: "white"
+    titleColor: "white"
 
     showNotes: true
 

@@ -44,7 +44,7 @@ Presentation {
     width: 1280
     height: 720
 
-    property color textColor: "white"
+    textColor: "white"
 
     property bool inTransition: false;
 

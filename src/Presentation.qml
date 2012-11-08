@@ -45,7 +45,7 @@ Item {
 
     property bool showNotes: false;
 
-    property color titleColor: "black"
+    property color titleColor: textColor;
     property color textColor: "black"
     property string fontFamily: "Helvetica"
     property string codeFontFamily: "Courier New"
