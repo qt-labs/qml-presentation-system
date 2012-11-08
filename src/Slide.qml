@@ -37,6 +37,11 @@
 import QtQuick 2.0
 
 Item {
+    /*
+      Slides can only be instantiated as a direct child of a Presentation {} as they rely on
+      several properties there.
+     */
+
     id: slide
 
     property bool isSlide: true;
@@ -45,6 +50,7 @@ Item {
     property variant content: []
     property string centeredText
     property string writeInText;
+    property string notes;
 
     property real fontSize: parent.height * 0.05
     property real fontScale: 1
@@ -64,9 +70,9 @@ Item {
     property real masterWidth: parent.width
     property real masterHeight: parent.height
 
-    property color titleColor: parent.titleColor != undefined ? parent.titleColor : textColor;
-    property color textColor: parent.textColor != undefined ? parent.textColor : "black"
-    property string fontFamily: parent.fontFamily != undefined ? parent.fontFamily : "Helvetica"
+    property color titleColor: parent.titleColor;
+    property color textColor: parent.textColor;
+    property string fontFamily: parent.fontFamily;
 
     visible: false
 
@@ -113,7 +119,7 @@ Item {
             from: 0;
             to: slide.writeInText.length;
             duration: slide.writeInText.length * 50;
-            running: slide.visible && parent.visible && writeInTextId.length
+            running: slide.visible && parent.visible && slide.writeInText.length > 0
         }
 
         visible: slide.writeInText != undefined;

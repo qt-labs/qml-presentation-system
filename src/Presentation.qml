@@ -35,6 +35,7 @@
 **************************************************************************/
 
 import QtQuick 2.0
+import QtQuick.Window 2.0
 
 Item {
     id: root
@@ -42,9 +43,16 @@ Item {
     property variant slides: []
     property int currentSlide;
 
-    property bool faded: false
+    property bool showNotes: false;
 
-    property int userNum;
+    property color titleColor: "black"
+    property color textColor: "black"
+    property string fontFamily: "Helvetica"
+    property string codeFontFamily: "Courier New"
+
+    // Private API
+    property bool _faded: false
+    property int _userNum;
 
     Component.onCompleted: {
         var slideCount = 0;
@@ -57,7 +65,7 @@ Item {
         }
 
         root.slides = slides;
-        root.userNum = 0;
+        root._userNum = 0;
 
         // Make first slide visible...
         if (root.slides.length > 0) {
@@ -73,8 +81,8 @@ Item {
     }
 
     function goToNextSlide() {
-        root.userNum = 0
-        if (faded)
+        root._userNum = 0
+        if (_faded)
             return
         if (root.currentSlide + 1 < root.slides.length) {
             var from = slides[currentSlide]
@@ -87,8 +95,8 @@ Item {
     }
 
     function goToPreviousSlide() {
-        root.userNum = 0
-        if (root.faded)
+        root._userNum = 0
+        if (root._faded)
             return
         if (root.currentSlide - 1 >= 0) {
             var from = slides[currentSlide]
@@ -101,16 +109,16 @@ Item {
     }
 
     function goToUserSlide() {
-        --userNum;
-        if (root.faded || userNum >= root.slides.length)
+        --_userNum;
+        if (root._faded || _userNum >= root.slides.length)
             return
-        if (userNum < 0)
+        if (_userNum < 0)
             goToNextSlide()
-        else if (root.currentSlide != userNum) {
+        else if (root.currentSlide != _userNum) {
             var from = slides[currentSlide]
-            var to = slides[userNum]
-           if (switchSlides(from, to, userNum > currentSlide)) {
-                currentSlide = userNum;
+            var to = slides[_userNum]
+           if (switchSlides(from, to, _userNum > currentSlide)) {
+                currentSlide = _userNum;
                root.focus = true;
            }
         }
@@ -126,15 +134,15 @@ Item {
     Keys.onEscapePressed: Qt.quit()
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
-            userNum = 10 * userNum + (event.key - Qt.Key_0)
+            _userNum = 10 * _userNum + (event.key - Qt.Key_0)
         else {
             if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
                 goToUserSlide();
             else if (event.key == Qt.Key_Backspace)
                 goToPreviousSlide();
             else if (event.key == Qt.Key_C)
-                root.faded = !root.faded;
-            userNum = 0;
+                root._faded = !root._faded;
+            _userNum = 0;
         }
     }
 
@@ -142,7 +150,7 @@ Item {
         z: 1000
         color: "black"
         anchors.fill: parent
-        opacity: root.faded ? 1 : 0
+        opacity: root._faded ? 1 : 0
         Behavior on opacity { NumberAnimation { duration: 250 } }
     }
 
@@ -155,6 +163,27 @@ Item {
                 goToPreviousSlide()
             else
                 goToNextSlide()
+        }
+    }
+
+    Window {
+        id: notesWindow;
+        width: 400
+        height: 300
+
+        windowTitle: "QML Presentation: Notes"
+        visible: root.showNotes
+
+        Text {
+            anchors.fill: parent
+            anchors.margins: parent.height * 0.1;
+
+            font.pixelSize: 16
+            wrapMode: Text.WordWrap
+
+            property string notes: root.slides[root.currentSlide].notes;
+            text: notes == "" ? "Slide has no notes..." : notes;
+            font.italic: notes == "";
         }
     }
 }

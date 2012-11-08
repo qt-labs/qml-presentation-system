@@ -39,7 +39,7 @@ import QtQuick 2.0
 Slide {
     id: slide;
 
-    property string codeFontFamily: "Courier New"
+    property string codeFontFamily: parent.codeFontFamily;
     property string code;
     property real codeFontSize: baseFontSize * 0.6;
 
@@ -123,7 +123,7 @@ Slide {
                 font.family: slide.codeFontFamily
                 font.pixelSize: slide.codeFontSize
                 font.bold: itemDelegate.ListView.isCurrentItem;
-                opacity: itemDelegate.ListView.isCurrentItem ? 1 : 0.8;
+                opacity: itemDelegate.ListView.isCurrentItem ? 1 : 0.9;
 
             }
 
@@ -146,7 +146,7 @@ Slide {
                 font.family: slide.codeFontFamily
                 font.pixelSize: slide.codeFontSize
                 font.bold: itemDelegate.ListView.isCurrentItem;
-                opacity: itemDelegate.ListView.isCurrentItem ? 1 : 0.8;
+                opacity: itemDelegate.ListView.isCurrentItem ? 1 : 0.9;
             }
         }
     }

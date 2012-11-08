@@ -300,6 +300,26 @@ int main(int argc, char **argv) {
         ]
     }
 
+    CodeSlide {
+        title: "Slide Notes in Another Window"
+        code:
+"Presentation {
+    showNotes: true;
+
+    Slide {
+        title: 'Slide One'
+        content: ['bullet point', 'bullet point'];
+        notes: 'Here cometh the notes...'
+    }
+
+    ...
+
+    // Check out examples/notes for a running example
+}
+"
+    }
+
+
     Slide {
         centeredText: "Now go make our own presentations\n\nEnjoy!"
     }
