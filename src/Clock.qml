@@ -12,7 +12,9 @@ Text {
 
     function currentTime() {
         var d = new Date();
-        return d.getHours() + ":" + d.getMinutes();
+        var m = d.getMinutes();
+        if (m < 10) m = "0" + m;
+        return d.getHours() + ":" + m;
     }
 
     color: textColor;
