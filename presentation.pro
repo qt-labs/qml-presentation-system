@@ -11,7 +11,7 @@ qmldir.files += \
     src/Slide.qml \
     src/SlideCounter.qml
 
-qmldir.path +=  $$[QT_INSTALL_IMPORTS]/$$TARGETPATH
+qmldir.path +=  $$[QT_INSTALL_QML]/$$TARGETPATH
 
 INSTALLS += qmldir
 

@@ -10,6 +10,7 @@ Do 'make install' in the root directory to install the files to QTDIR/imports
 Once that is done, all examples should run out of the box
 
 
+
 Organization
 ------------
 
@@ -20,6 +21,7 @@ This is a good place to start if you want to use it.
 Examples on more advanced presentations are located here:
   examples/customtransition/SlideDeck.qml
   examples/animatedbackground/SlideDeck.qml
+  examples/notes/SlideDeck.qml
 
 The source code for the Slide and Presentation elements are located under:
   Qt/labs/presentation
@@ -32,3 +34,6 @@ Usage Tips
  - The default size of presentations is hardcoded into the presentation .qml
    file. One can pass '--fullscreen' on the command line to qmlscene to show
    the presentation fullscreen.
+
+ - under tools/printslides, there is a small tool to generate a slide deck
+   .pdf file from your slide deck.
