@@ -177,7 +177,7 @@ Item {
         width: 400
         height: 300
 
-        windowTitle: "QML Presentation: Notes"
+        title: "QML Presentation: Notes"
         visible: root.showNotes
 
         Text {
