@@ -124,7 +124,7 @@ Item {
         NumberAnimation on length {
             from: 0;
             to: slide.writeInText.length;
-            duration: slide.writeInText.length * 50;
+            duration: slide.writeInText.length * 30;
             running: slide.visible && parent.visible && slide.writeInText.length > 0
         }
 
