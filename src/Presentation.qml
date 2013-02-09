@@ -170,6 +170,7 @@ Item {
             else
                 goToNextSlide()
         }
+        onPressAndHold: goToPreviousSlide(); //A back mechanism for touch only devices
     }
 
     Window {
