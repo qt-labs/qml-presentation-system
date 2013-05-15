@@ -63,8 +63,8 @@ Item {
     Component.onCompleted: {
         var slideCount = 0;
         var slides = [];
-        for (var i=0; i<root.resources.length; ++i) {
-            var r = root.resources[i];
+        for (var i=0; i<root.children.length; ++i) {
+            var r = root.children[i];
             if (r.isSlide) {
                 slides.push(r);
             }
