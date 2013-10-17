@@ -52,6 +52,19 @@ Item {
 
     property bool isSlide: true;
 
+    property bool delayPoints: false;
+    property int _pointCounter: 0;
+    function _advance() {
+        if (!parent.allowDelay)
+            return false;
+
+        _pointCounter = _pointCounter + 1;
+        if (_pointCounter < content.length)
+            return true;
+        _pointCounter = 0;
+        return false;
+    }
+
     property string title;
     property variant content: []
     property string centeredText
@@ -149,6 +162,7 @@ Item {
 
                 height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
                 x: slide.baseFontSize * indentLevel
+                visible: (!slide.parent.allowDelay || !delayPoints) || index <= _pointCounter
 
                 Rectangle {
                     id: dot

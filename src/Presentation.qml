@@ -50,6 +50,7 @@ Item {
     property int currentSlide;
 
     property bool showNotes: false;
+    property bool allowDelay: true;
 
     property color titleColor: textColor;
     property color textColor: "black"
@@ -90,6 +91,10 @@ Item {
         root._userNum = 0
         if (_faded)
             return
+        if (root.slides[currentSlide].delayPoints) {
+            if (root.slides[currentSlide]._advance())
+                return;
+        }
         if (root.currentSlide + 1 < root.slides.length) {
             var from = slides[currentSlide]
             var to = slides[currentSlide + 1]

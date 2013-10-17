@@ -63,6 +63,7 @@ void SlideView::updateStatus(QQuickView::Status status) {
     }
     else qDebug() << "Found qml Presentation as rootObject";
 
+    ri->setProperty("allowDelay", QVariant(false));//Disable partial reveals on slide pages
     QList<QVariant> slides = ri->property("slides").toList();
     m_slidesLeft = slides.size();
     qDebug() << "SlideCount: " << m_slidesLeft;
