@@ -48,6 +48,7 @@ Item {
 
     property variant slides: []
     property int currentSlide;
+    property int pageStep: 5;
 
     property bool showNotes: false;
     property bool allowDelay: true;
@@ -60,6 +61,10 @@ Item {
     // Private API
     property bool _faded: false
     property int _userNum;
+
+    Database {
+        id : db
+    }
 
     Component.onCompleted: {
         var slideCount = 0;
@@ -74,11 +79,23 @@ Item {
         root.slides = slides;
         root._userNum = 0;
 
+        db.initialize();
+        var lastSlide = db.getSetting("lastSlide");
+        if (lastSlide == "NULL")
+            lastSlide = 0;
+
         // Make first slide visible...
         if (root.slides.length > 0) {
-            root.currentSlide = 0;
+            if (lastSlide >= 0 && lastSlide < root.slides.length)
+                root.currentSlide = lastSlide;
+            else
+                root.currentSlide = 0;
             root.slides[root.currentSlide].visible = true;
         }
+    }
+
+    Component.onDestruction: {
+        db.setSetting("lastSlide", currentSlide);
     }
 
     function switchSlides(from, to, forward) {
@@ -153,6 +170,22 @@ Item {
                 goToPreviousSlide();
             else if (event.key == Qt.Key_C)
                 root._faded = !root._faded;
+            else if (event.key == Qt.Key_Home) {
+                _userNum = 1;
+                goToUserSlide();
+            }
+            else if (event.key == Qt.Key_End) {
+                _userNum = root.slides.length;
+                goToUserSlide();
+            }
+            else if (event.key == Qt.Key_PageUp && (currentSlide - pageStep) >= 0) {
+                _userNum = (currentSlide - pageStep);
+                goToUserSlide();
+            }
+            else if (event.key == Qt.Key_PageDown && (currentSlide + pageStep) <= root.slides.length) {
+                _userNum = (currentSlide + pageStep);
+                goToUserSlide();
+            }
             _userNum = 0;
         }
     }
