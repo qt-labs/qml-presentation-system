@@ -92,6 +92,7 @@ Item {
     property color titleColor: parent.titleColor;
     property color textColor: parent.textColor;
     property string fontFamily: parent.fontFamily;
+    property int textFormat: Text.PlainText
 
     visible: false
 
@@ -187,7 +188,7 @@ Item {
                     width: slide.contentWidth - parent.x - dot.width - space.width
                     font.pixelSize: baseFontSize * row.indentFactor
                     text: content[index]
-                    textFormat: Text.PlainText
+                    textFormat: slide.textFormat
                     wrapMode: Text.WordWrap
                     color: slide.textColor
                     horizontalAlignment: Text.AlignLeft
