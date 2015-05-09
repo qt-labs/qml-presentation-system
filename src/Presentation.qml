@@ -186,16 +186,61 @@ Item {
         title: "QML Presentation: Notes"
         visible: root.showNotes
 
-        Text {
+        Flickable {
             anchors.fill: parent
-            anchors.margins: parent.height * 0.1;
+            contentWidth: parent.width
+            contentHeight: textContainer.height
 
-            font.pixelSize: 16
-            wrapMode: Text.WordWrap
+            Item {
+                id: textContainer
+                width: parent.width
+                height: notesText.height + 2 * notesText.padding
 
-            property string notes: root.slides[root.currentSlide].notes;
-            text: notes == "" ? "Slide has no notes..." : notes;
-            font.italic: notes == "";
+                Text {
+                    id: notesText
+
+                    property real padding: 16;
+
+                    x: padding
+                    y: padding
+                    width: parent.width - 2 * padding
+
+
+                    font.pixelSize: 16
+                    wrapMode: Text.WordWrap
+
+                    property string notes: root.slides[root.currentSlide].notes;
+
+                    onNotesChanged: {
+                        var result = "";
+
+                        var lines = notes.split("\n");
+                        var beginNewLine = false
+                        for (var i=0; i<lines.length; ++i) {
+                            var line = lines[i].trim();
+                            if (line.length == 0) {
+                                beginNewLine = true;
+                            } else {
+                                if (beginNewLine && result.length) {
+                                    result += "\n\n"
+                                    beginNewLine = false
+                                }
+                                if (result.length > 0)
+                                    result += " ";
+                                result += line;
+                            }
+                        }
+
+                        if (result.length == 0) {
+                            font.italic = true;
+                            text = "no notes.."
+                        } else {
+                            font.italic = false;
+                            text = result;
+                        }
+                    }
+                }
+            }
         }
     }
 }
