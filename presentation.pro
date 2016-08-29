@@ -1,7 +1,3 @@
 TEMPLATE = subdirs
 SUBDIRS = src
 
-
-
-
-
