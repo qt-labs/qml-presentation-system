@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Window 2.0
 
 Item {
@@ -52,6 +52,8 @@ Item {
     property bool showNotes: false;
     property bool allowDelay: true;
     property alias mouseNavigation: mouseArea.enabled
+    property bool arrowNavigation: true
+    property bool keyShortcutsEnabled: true
 
     property color titleColor: textColor;
     property color textColor: "black"
@@ -100,20 +102,16 @@ Item {
             if (root.slides[currentSlide]._advance())
                 return;
         }
-        if (currentSlide + 1 < root.slides.length) {
+        if (currentSlide + 1 < root.slides.length)
             ++currentSlide;
-            root.focus = true;
-        }
     }
 
     function goToPreviousSlide() {
         root._userNum = 0
         if (root._faded)
             return
-        if (currentSlide - 1 >= 0) {
+        if (currentSlide - 1 >= 0)
             --currentSlide;
-           root.focus = true;
-        }
     }
 
     function goToUserSlide() {
@@ -128,27 +126,31 @@ Item {
         }
     }
 
-    focus: true
-
-    Keys.onSpacePressed: goToNextSlide()
-    Keys.onRightPressed: goToNextSlide()
-    Keys.onDownPressed: goToNextSlide()
-    Keys.onLeftPressed: goToPreviousSlide()
-    Keys.onUpPressed: goToPreviousSlide()
-    Keys.onEscapePressed: Qt.quit()
+    // directly type in the slide number: depends on root having focus
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
             _userNum = 10 * _userNum + (event.key - Qt.Key_0)
         else {
             if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter)
                 goToUserSlide();
-            else if (event.key == Qt.Key_Backspace)
-                goToPreviousSlide();
-            else if (event.key == Qt.Key_C)
-                root._faded = !root._faded;
             _userNum = 0;
         }
     }
+
+    // navigate with arrow keys
+    Shortcut { sequence: StandardKey.MoveToNextLine; enabled: root.arrowNavigation; onActivated: goToNextSlide() }
+    Shortcut { sequence: StandardKey.MoveToPreviousLine; enabled: root.arrowNavigation; onActivated: goToPreviousSlide() }
+    Shortcut { sequence: StandardKey.MoveToNextChar; enabled: root.arrowNavigation; onActivated: goToNextSlide() }
+    Shortcut { sequence: StandardKey.MoveToPreviousChar; enabled: root.arrowNavigation; onActivated: goToPreviousSlide() }
+
+    // presentation-specific single-key shortcuts (which interfere with normal typing)
+    Shortcut { sequence: " "; enabled: root.keyShortcutsEnabled; onActivated: goToNextSlide() }
+    Shortcut { sequence: "c"; enabled: root.keyShortcutsEnabled; onActivated: root._faded = !root._faded }
+
+    // standard shortcuts
+    Shortcut { sequence: StandardKey.MoveToNextPage; onActivated: goToNextSlide() }
+    Shortcut { sequence: StandardKey.MoveToPreviousPage; onActivated: goToPreviousSlide() }
+    Shortcut { sequence: StandardKey.Quit; onActivated: Qt.quit() }
 
     Rectangle {
         z: 1000
