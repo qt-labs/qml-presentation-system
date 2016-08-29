@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the QML Presentation System.
 **
@@ -47,7 +47,7 @@ Item {
     id: root
 
     property variant slides: []
-    property int currentSlide;
+    property int currentSlide: 0
 
     property bool showNotes: false;
     property bool allowDelay: true;
@@ -61,6 +61,7 @@ Item {
     // Private API
     property bool _faded: false
     property int _userNum;
+    property int _lastShownSlide: 0
 
     Component.onCompleted: {
         var slideCount = 0;
@@ -76,16 +77,19 @@ Item {
         root._userNum = 0;
 
         // Make first slide visible...
-        if (root.slides.length > 0) {
-            root.currentSlide = 0;
+        if (root.slides.length > 0)
             root.slides[root.currentSlide].visible = true;
-        }
     }
 
     function switchSlides(from, to, forward) {
         from.visible = false
         to.visible = true
         return true
+    }
+
+    onCurrentSlideChanged: {
+        switchSlides(root.slides[_lastShownSlide], root.slides[currentSlide], currentSlide > _lastShownSlide)
+        _lastShownSlide = currentSlide
     }
 
     function goToNextSlide() {
@@ -96,13 +100,9 @@ Item {
             if (root.slides[currentSlide]._advance())
                 return;
         }
-        if (root.currentSlide + 1 < root.slides.length) {
-            var from = slides[currentSlide]
-            var to = slides[currentSlide + 1]
-            if (switchSlides(from, to, true)) {
-                currentSlide = currentSlide + 1;
-                root.focus = true;
-            }
+        if (currentSlide + 1 < root.slides.length) {
+            ++currentSlide;
+            root.focus = true;
         }
     }
 
@@ -110,13 +110,9 @@ Item {
         root._userNum = 0
         if (root._faded)
             return
-        if (root.currentSlide - 1 >= 0) {
-            var from = slides[currentSlide]
-            var to = slides[currentSlide - 1]
-           if (switchSlides(from, to, false)) {
-                currentSlide = currentSlide - 1;
-               root.focus = true;
-           }
+        if (currentSlide - 1 >= 0) {
+            --currentSlide;
+           root.focus = true;
         }
     }
 
@@ -126,13 +122,9 @@ Item {
             return
         if (_userNum < 0)
             goToNextSlide()
-        else if (root.currentSlide != _userNum) {
-            var from = slides[currentSlide]
-            var to = slides[_userNum]
-           if (switchSlides(from, to, _userNum > currentSlide)) {
-                currentSlide = _userNum;
-               root.focus = true;
-           }
+        else {
+            currentSlide = _userNum;
+            root.focus = true;
         }
     }
 
