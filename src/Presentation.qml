@@ -51,6 +51,7 @@ Item {
 
     property bool showNotes: false;
     property bool allowDelay: true;
+    property alias mouseNavigation: mouseArea.enabled
 
     property color titleColor: textColor;
     property color textColor: "black"
