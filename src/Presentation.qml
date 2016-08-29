@@ -78,6 +78,16 @@ Item {
         root.slides = slides;
         root._userNum = 0;
 
+        // Take the first argument which can be parsed as a number and set the first slide
+        // so e.g.  qml slides.qml -- 4  will start on slide 4 (starting with 1)
+        for (var i = 0; i < Qt.application.arguments.length; ++i) {
+            var num = parseInt(Qt.application.arguments[i])
+            if (!isNaN(num)) {
+                currentSlide = Math.min(Math.max(0, num - 1), root.slides.length - 1)
+                break
+            }
+        }
+
         // Make first slide visible...
         if (root.slides.length > 0)
             root.slides[root.currentSlide].visible = true;
